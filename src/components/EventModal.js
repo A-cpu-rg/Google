@@ -1,15 +1,6 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-
-const labelsClasses = [
-  "indigo",
-  "gray",
-  "green",
-  "blue",
-  "red",
-  "purple",
-];
-
+const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 export default function EventModal() {
   const {
     setShowEventModal,
@@ -17,7 +8,6 @@ export default function EventModal() {
     dispatchCalEvent,
     selectedEvent,
   } = useContext(GlobalContext);
-
   const [title, setTitle] = useState(
     selectedEvent ? selectedEvent.title : ""
   );
@@ -29,7 +19,6 @@ export default function EventModal() {
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
   );
-
   function handleSubmit(e) {
     e.preventDefault();
     const calendarEvent = {
@@ -44,12 +33,11 @@ export default function EventModal() {
     } else {
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
-
     setShowEventModal(false);
   }
   return (
-    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4">
+    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-gray-900 bg-opacity-50">
+      <form className="bg-white rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-1/2 xl:w-1/3">
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
           <span className="material-icons-outlined text-gray-400">
             drag_handle
@@ -77,7 +65,7 @@ export default function EventModal() {
           </div>
         </header>
         <div className="p-3">
-          <div className="grid grid-cols-1/5 items-end gap-y-7">
+          <div className="grid grid-cols-1 items-end gap-y-7">
             <div></div>
             <input
               type="text"

@@ -24,32 +24,36 @@ export default function CalendarHeader() {
   }
 
   return (
-    <header className="px-4 py-2 flex items-center justify-between">
-      <div className="flex items-center">
-        <img src={logo} alt="calendar" className="mr-2 w-12 h-12" />
-        <h1 className="mr-10 text-xl text-gray-500 font-bold">Calendar</h1>
-        <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
-          Today
-        </button>
-        <button onClick={handlePrevMonth}>
-          <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
-            chevron_left
-          </span>
-        </button>
-        <button onClick={handleNextMonth}>
-          <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
-            chevron_right
-          </span>
-        </button>
-        <h2 className="ml-4 text-xl text-gray-500 font-bold">
+    <header className="px-4 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row items-center sm:space-x-5 space-y-3 sm:space-y-0">
+        <img src={logo} alt="calendar" className="w-10 h-10 sm:w-12 sm:h-12" />
+        <h1 className="text-lg sm:text-xl text-gray-500 font-bold">Calendar</h1>
+
+        <div className="flex space-x-2">
+          <button onClick={handleReset} className="border rounded py-1 px-3 sm:py-2 sm:px-4 text-sm sm:text-base">
+            Today
+          </button>
+          <button onClick={handlePrevMonth}>
+            <span className="material-icons-outlined cursor-pointer text-gray-600 text-base sm:text-xl">
+              chevron_left
+            </span>
+          </button>
+          <button onClick={handleNextMonth}>
+            <span className="material-icons-outlined cursor-pointer text-gray-600 text-base sm:text-xl">
+              chevron_right
+            </span>
+          </button>
+        </div>
+
+        <h2 className="text-lg sm:text-xl text-gray-500 font-bold">
           {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
         </h2>
       </div>
 
-      <div>
+      <div className="mt-3 sm:mt-0">
         <SignedOut>
           <SignInButton mode="modal">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded">
+            <button className="bg-blue-500 text-white py-1 px-3 sm:py-2 sm:px-4 rounded text-sm sm:text-base">
               Sign In
             </button>
           </SignInButton>
