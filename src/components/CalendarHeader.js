@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../assets/logo.png";
 import GlobalContext from "../context/GlobalContext";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import SettingsModal from "./SettingsModal"; // Import the modal
 
 export default function CalendarHeader() {
   const { monthIndex, setMonthIndex } = useContext(GlobalContext);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // State for modal visibility
 
   function handlePrevMonth() {
     setMonthIndex(monthIndex - 1);
@@ -50,7 +52,14 @@ export default function CalendarHeader() {
         </h2>
       </div>
 
-      <div className="mt-3 sm:mt-0">
+      <div className="mt-3 sm:mt-0 flex items-center space-x-4">
+        <button
+          onClick={() => setIsSettingsOpen(true)} // Open settings modal
+          className="border rounded py-1 px-3 sm:py-2 sm:px-4 text-sm sm:text-base"
+        >
+          Settings
+        </button>
+
         <SignedOut>
           <SignInButton mode="modal">
             <button className="bg-blue-500 text-white py-1 px-3 sm:py-2 sm:px-4 rounded text-sm sm:text-base">
@@ -63,6 +72,9 @@ export default function CalendarHeader() {
           <UserButton />
         </SignedIn>
       </div>
+
+      {/* Render the settings modal if open */}
+      {isSettingsOpen && <SettingsModal onClose={() => setIsSettingsOpen(false)} />}
     </header>
   );
 }
